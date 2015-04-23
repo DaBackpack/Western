@@ -1,0 +1,14 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace />
+  <MonoDevelop.Ide.Workbench ActiveDocument="..\Bender\Assets\MotionController.cs">
+    <Files>
+      <File FileName="..\Bender\Assets\MotionController.cs" Line="14" Column="96" />
+      <File FileName="..\Bender\Assets\LeapMotion\Scripts\HandController.cs" Line="303" Column="18" />
+      <File FileName="Assets\Player.cs" Line="64" Column="21" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
