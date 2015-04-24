@@ -52,12 +52,15 @@
      <Compile Include="Assets\Character.cs" />
      <Compile Include="Assets\Enemy.cs" />
      <Compile Include="Assets\EnvironmentObject.cs" />
+     <Compile Include="Assets\ExitScript.cs" />
      <Compile Include="Assets\GameController.cs" />
+     <Compile Include="Assets\Level.cs" />
      <Compile Include="Assets\Player.cs" />
      <Compile Include="Assets\ProjectileAttack.cs" />
      <Compile Include="Assets\Targeter.cs" />
      <Compile Include="Assets\UIController.cs" />
      <Compile Include="Assets\Weapon.cs" />
+     <Compile Include="Assets\_LEVEL_SCRIPTS\Level1.cs" />
      <None Include="Assets\Custom_Sprites-Diffuse.shader" />
      <None Include="Assets\InvisibleObjectShader.shader" />
  <Reference Include="UnityEngine.UI">
