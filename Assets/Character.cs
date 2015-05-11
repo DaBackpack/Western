@@ -26,6 +26,7 @@ public class Character : MonoBehaviour {
 			weapon = GetComponentInChildren<Weapon> ();
 
 		manager = GetComponentInChildren<BonusManager> ();
+
 	}
 
 	public Collider getCollider(){
@@ -41,6 +42,13 @@ public class Character : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 	
+	}
+
+	public void receiveAttack(CloseWeapon attack){
+		hitPoints -= attack.getAttack ();
+		if (hitPoints <= 0) {
+			die ();
+		}
 	}
 
 	public virtual void receiveAttack(ProjectileAttack attack){
@@ -139,12 +147,26 @@ public class Character : MonoBehaviour {
 
 	protected void die(){
 		targeter.destroyReticule ();
+		GameController.gameController.characterDead (this);
+
+		if (dropItem () == 1) {
+			GameObject health = (GameObject) Instantiate (Resources.Load("HealthPack"));
+			health.transform.position = gameObject.transform.position;
+		}
+
 		Destroy (gameObject);
 		return;
 	}
 
 	public float getHitPoints(){
 		return hitPoints;
+	}
+
+	int dropItem(){
+		float rand = Random.Range (0, 1);
+		if (rand < .5)
+			return 1;
+		return 0;
 	}
 	
 }

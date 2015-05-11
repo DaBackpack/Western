@@ -5,18 +5,29 @@ public class Player : Character {
 	public float speed, jumpSpeed, bulletSpeed;
 	float accReading, evaReading; 
 	private bool onGround; 
+	public static Player player;
 
-
-
+//TODO: Find out why multiple reticules are doing shit
 	
 	protected override void Awake(){
 		base.Awake ();
+		if (player == null) {
+			player = this;
+			DontDestroyOnLoad(gameObject);
+		} else if (player != this) {
+			this.targeter.destroyReticule ();
+			Destroy (gameObject);
+			print ("Called every scene");
+		}
+
 	}
 
 	// Use this for initialization
 	protected override void Start () {
+		print ("Called EXACTLY ONCE EVER");
 		base.Start ();
 		onGround = false;
+
 
 	}
 	
@@ -108,5 +119,11 @@ public class Player : Character {
 
 	public Targeter getTargeter(){
 		return targeter;
+	}
+
+	public void heal(float amount){
+		hitPoints += amount;
+		if (hitPoints > maxHitPoints)
+			hitPoints = maxHitPoints;
 	}
 }

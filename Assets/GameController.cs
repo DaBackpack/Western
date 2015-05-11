@@ -10,44 +10,49 @@ public class GameController : MonoBehaviour {
 	private List<Character> enemies;
 	private List<Character> players;
 	public Level level;
-	public Player p;
 	public GameObject exit;
+
 
 
 	// Persistent data is passed to this Game Controller after the previous scene ends. 
 	// The previous GameController is then destroyed in Awake().
 
-	void inherit(GameController c){
-		//TODO: Any persistent stats are copied to here. 
+	void dontDestroy(Transform c){
+		DontDestroyOnLoad (this.gameObject);
+		foreach (Transform child in c.transform){
+			DontDestroyOnLoad (child.gameObject);
+			dontDestroy (child);
+		}
 	}
 
 	void Awake() {
-		if (gameController == null) {
-			DontDestroyOnLoad (this);
+		/*if (gameController == null) {
+			DontDestroyOnLoad (gameObject);
+			dontDestroy (transform);
 			gameController = this;
 		} else if (gameController != this) {
-			this.inherit (gameController);
-			Destroy (gameController.gameObject);
-			gameController = this;
-			DontDestroyOnLoad (this);
+			//this.inherit (gameController);
+			Destroy (gameObject);
+
 		}
 
+			*/		
+		gameController = this;
 		
 		enemies = new List<Character> ();
-		players = new List<Character> ();
-
 		exit.SetActive (false);
-
+		Player[] playerArr = FindObjectsOfType<Player> ();
+		players = new List<Character>(playerArr);
 	
 	}
 	// Use this for initialization
 	void Start () {
 		time = interval;
-		GameController.gameController.addPlayer (p);
 	}
 	
 	// Update is called once per frame
 	void Update () {
+
 		if (level.isFinished ()) {
 			exit.SetActive (true);
 		}

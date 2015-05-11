@@ -2,11 +2,11 @@
 using System.Collections;
 
 public class UIController : MonoBehaviour {
-	public Player player; 
+	Player player; 
 	public UnityEngine.UI.Text accText, enemyHPText;
 	// Use this for initialization
 	void Start () {
-	
+		player = Player.player;
 	}
 	
 	// Update is called once per frame

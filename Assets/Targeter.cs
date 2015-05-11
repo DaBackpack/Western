@@ -11,9 +11,11 @@ public class Targeter : MonoBehaviour {
 	private int charIndex;
 
 	void Awake(){
-		reticule = (GameObject)Instantiate(Resources.Load("Reticule"));
+		if (reticule == null) {
+			reticule = (GameObject)Instantiate (Resources.Load ("Reticule"));
+		}
 		position = transform.parent;
-		findTargets ();
+
 
 		charIndex = 0;
 	}
@@ -25,18 +27,25 @@ public class Targeter : MonoBehaviour {
 	}
 
 	void findTargets(){
-		//TODO: CHANGE THIS!!!
+
 		if (transform.parent.gameObject.tag == "Player") {
-			targetList = new List<Character>((Enemy[]) FindObjectsOfType(typeof(Enemy)));
+			targetList = GameController.gameController.getEnemies ();
 			
 		} else {
-			targetList = new List<Character>((Player[]) FindObjectsOfType(typeof(Player)));
+			targetList = GameController.gameController.getPlayers();
 		}
 
 	}
 	
 	// Update is called once per frame
 	void Update () {
+
+		// If we are entering from another scene...
+		if (reticule == null) {
+			Awake ();
+		}
+
+
 		findTargets ();
 		if (target == null) {
 			changeTarget ();
@@ -56,8 +65,9 @@ public class Targeter : MonoBehaviour {
 
 	public void changeTarget(){
 		int size = targetList.Count;
-		if (size == 0)
+		if (size == 0) {
 			return;
+		}
 
 		charIndex++;
 		if (charIndex >= size) {
